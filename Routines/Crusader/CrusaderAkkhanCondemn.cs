@@ -53,11 +53,11 @@ namespace Trinity.Routines.Crusader
             if (ShouldWalkToGroundBuff(out buffPosition))
                 return Walk(buffPosition);
 
-            if (!Skills.Crusader.Punish.IsBuffActive && ShouldPunish(out target))
-                return Punish(target);
+            if (TryPrimaryPower(out power))
+                return power;
 
-            if (ShouldSlash(out target))
-                return Slash(target);
+            if (TrySecondaryPower(out power))
+                return power;
 
             if (IsNoPrimary)
                 return Walk(CurrentTarget);
@@ -205,7 +205,8 @@ namespace Trinity.Routines.Crusader
             if (!Skills.Crusader.Condemn.CanCast())
                 return false;
 
-            if (Legendary.FrydehrsWrath.IsEquipped && Player.PrimaryResource < 40)
+            if (Legendary.FrydehrsWrath.IsEquipped && Player.PrimaryResource <
+                40 * (1 - Core.Player.ResourceCostReductionPct))
                 return false;
 
             if (Settings.SpamCondemn)
