@@ -58,6 +58,9 @@ namespace Trinity.Routines.Crusader
             
             if (TrySecondaryPower(out power))
                 return power;
+            
+            if (IsNoPrimary)
+                return Walk(CurrentTarget);
 
 
             return null;
