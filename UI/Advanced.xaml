@@ -30,7 +30,7 @@
                         <UniformGrid Columns="2"  VerticalAlignment="Center">
                             <CheckBox IsChecked="{Binding Advanced.TpsEnabled}" VerticalAlignment="Center">Enable TPS modification</CheckBox>
                             <Slider Template="{DynamicResource SliderEditable}" IsEnabled="{Binding Advanced.TpsEnabled}"
-                    Interval="500" Maximum="30" Minimum="1" SmallChange="1" TickFrequency="3" TickPlacement="BottomRight"
+                    Interval="500" Maximum="60" Minimum="1" SmallChange="1" TickFrequency="3" TickPlacement="BottomRight"
                     Value="{Binding Advanced.TpsLimit}" 
                     HorizontalAlignment="Stretch" Margin="5,0,5,0"
                         ToolTip="Set below 10 to reduce CPU use (but dumb the bot down). You can experiment above 10 (Db Default), but this will eat CPU)"/>
