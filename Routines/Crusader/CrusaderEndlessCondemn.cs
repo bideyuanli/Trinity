@@ -57,22 +57,19 @@ namespace Trinity.Routines.Crusader
         {
             if (Player.IsInTown)
                 return null;
-            if (IsSteedCharging)
-                return null;
-            TrinityPower power;
 
             if (ShouldAkaratsChampion())
                 return AkaratsChampion();
 
-            if (TryLaw(out power))
-                return power;
+            if (ShouldLawsOfValor())
+                return LawsOfValor();
 
             return null;
         }
 
         public TrinityPower GetDestructiblePower()
         {
-            return DefaultDestructiblePower();
+            return Condemn();
         }
 
         public TrinityPower GetMovementPower(Vector3 destination)
@@ -80,16 +77,13 @@ namespace Trinity.Routines.Crusader
             return null;
         }
 
-
         protected override bool ShouldProvoke()
         {
             return false;
         }
+
         protected override bool ShouldCondemn()
         {
-            if (!Skills.Crusader.Condemn.CanCast())
-                return false;
-
             if (!TargetUtil.AnyMobsInRange(15f))
                 return false;
             if (Player.PrimaryResource < 8)
@@ -108,8 +102,6 @@ namespace Trinity.Routines.Crusader
 
         protected override bool ShouldLawsOfValor()
         {
-            if (!Settings.SpamLawsOfValor)
-                return false;
             if (!Skills.Crusader.LawsOfValor.CanCast())
                 return false;
             double time_to_holy = TimeToElementStart(Element.Holy);
