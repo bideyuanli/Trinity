@@ -79,7 +79,7 @@ namespace Trinity.Routines.Crusader
         {
             if (Player.IsInTown)
                 return null;
-            if (IsSteedCharging)
+            if (IsSteedCharging && !IsNoPrimary)
                 return null;
 
             if (AllowedToUse(Settings.Akarats, Skills.Crusader.AkaratsChampion) && ShouldAkaratsChampion())
@@ -169,6 +169,14 @@ namespace Trinity.Routines.Crusader
             return true;
         }
 
+        protected virtual bool ShouldLawsOfHope()
+        {
+            if (!Skills.Crusader.LawsOfHope.CanCast())
+                return false;
+
+            return true;
+        }
+
         protected override bool ShouldLawsOfValor()
         {
             if (!Skills.Crusader.LawsOfValor.CanCast())
@@ -238,7 +246,7 @@ namespace Trinity.Routines.Crusader
         /// </summary>
         public TrinityPower GetDestructiblePower()
         {
-            return DefaultDestructiblePower();
+            return Condemn();
         }
 
         /// <summary>
